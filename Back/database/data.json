@@ -1,0 +1,35 @@
+{
+  "trips": [
+    {
+      "id": 1,
+      "departure": "Paris",
+      "arrival": "Lyon",
+      "date": "2025-10-15",
+      "transport": "Covoiturage",
+      "seats": 3
+    },
+    {
+      "id": 2,
+      "departure": "Marseille",
+      "arrival": "Paris",
+      "date": "2025-09-12",
+      "transport": "Covoiture",
+      "seats": "3"
+    },
+    {
+      "id": 3,
+      "departure": "Marseille",
+      "arrival": "Paris",
+      "date": "2025-09-12",
+      "transport": "Covoiturage",
+      "seats": "3"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "trip_id": 1,
+      "passenger_name": "Alice"
+    }
+  ]
+}
