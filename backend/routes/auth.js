@@ -1,21 +1,15 @@
+// routes/auth.js
+
 const express = require("express");
 const router = express.Router();
 
-// Route POST /auth/register
-router.post("/register", (req, res) => {
-  const { name,email, password } = req.body;
+// 💡 ATTENTION : Corrigez le chemin si votre dossier s'appelle 'controllers' (pluriel)
+// Je vais utiliser 'controllers' comme standard ici :
+const authController = require('../controller/authController'); 
 
-  // Vérification simple
-  if (!name || !email || !password) {
-    return res.status(400).json({ message: "Nom ,Email et mot de passe requis" });
-  }
 
-  // Ici tu peux ajouter la logique pour sauvegarder l'utilisateur
-  // Par exemple dans une base de données, mais pour le moment on simule :
-  const newUser = { id: Date.now(),name, email, password };
-
-  // Retourne un message de succès
-  res.status(201).json({ message: `${name} ${email} créé avec succès !`, user: newUser });
-});
+// Cette seule ligne suffit : elle passe la main à la fonction register
+// de votre authController pour gérer la logique complète (hachage, écriture JSON).
+router.post('/register', authController.register); 
 
 module.exports = router;

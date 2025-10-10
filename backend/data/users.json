@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "UserId": 1,
+    "Name": "Ali",
+    "Email": "ali@test.com",
+    "Password": "$2b$10$UcBq8ixHNcaZ4vmslrpUWObDd7VjW9x7G6E6YeVQTyJG4ofOBUWtq",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 2,
+    "Name": "test",
+    "Email": "testr@test.com",
+    "Password": "$2b$10$PyuLiocNmE3aaqFiCnkIUudhGgfzyxQR8mrg/6MRTwSuNi5/D622.",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 3,
+    "Name": "nom complet",
+    "Email": "Email@Email.com",
+    "Password": "$2b$10$AqEA4S1dachg5uIfERsO.OrUg.i1vB8VRwWY1ErJa8M7WADxaV8gS",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  }
+]
