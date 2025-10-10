@@ -6,7 +6,7 @@
       "arrival": "Lyon",
       "date": "2025-10-15",
       "transport": "Covoiturage",
-      "seats": 3
+      "seats": 2
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "arrival": "Paris",
       "date": "2025-09-12",
       "transport": "Covoiture",
-      "seats": "3"
+      "seats": 2
     },
     {
       "id": 3,
@@ -22,7 +22,15 @@
       "arrival": "Paris",
       "date": "2025-09-12",
       "transport": "Covoiturage",
-      "seats": "3"
+      "seats": 2
+    },
+    {
+      "id": 4,
+      "departure": "Bordeaux",
+      "arrival": "Lyon",
+      "date": "2025-12-15",
+      "transport": "Covoiturage",
+      "seats": 4
     }
   ],
   "bookings": [
@@ -30,6 +38,26 @@
       "id": 1,
       "trip_id": 1,
       "passenger_name": "Alice"
+    },
+    {
+      "id": 2,
+      "trip_id": 1,
+      "passenger_name": "Jean"
+    },
+    {
+      "id": 3,
+      "trip_id": 2,
+      "passenger_name": "Jean"
+    },
+    {
+      "id": 4,
+      "trip_id": 3,
+      "passenger_name": "Jean"
+    },
+    {
+      "id": 5,
+      "trip_id": 4,
+      "passenger_name": "Jean"
     }
   ]
 }
