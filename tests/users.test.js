@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { createAccount, login } = require('./../backend/users');
+const { createAccount, login, deleteAccount } = require('./../backend/users');
 
 const USERS_PATH = path.join(__dirname, '../backend', 'data', 'users.json');
 
@@ -34,3 +34,12 @@ test('Connexion échoue avec mauvais mot de passe', () => {
   const result = login('dana@example.com', 'wrong');
   expect(result.success).toBe(false);
 });
+
+test('Delete account', () => {
+    createAccount('Dana', 'dana@example.com', 'secret', 'local', '');
+    let result = deleteAccount("");
+    expect(result.success).toBe(false);
+    expect(result.message).toBe('User not found');
+    result = deleteAccount('dana@example.com');
+    expect(result.success).toBe(true);
+})
