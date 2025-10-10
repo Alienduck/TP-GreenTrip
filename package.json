@@ -2,5 +2,26 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0"
+  },
+  "name": "tp-greentrip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alienduck/TP-GreenTrip.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alienduck/TP-GreenTrip/issues"
+  },
+  "homepage": "https://github.com/Alienduck/TP-GreenTrip#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
   }
 }
