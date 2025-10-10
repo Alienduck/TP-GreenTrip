@@ -3,23 +3,24 @@ const path = require('path');
 
 const USERS_PATH = path.join(__dirname, 'data', 'users.json');
 
-// TODO: tests
 function getUserCount(users) {
     const maxId = users.reduce((max, u) => Math.max(max, u.UserId || 0), 0);
     return maxId + 1;
 }
 
-// TODO: tests
 function userExist(users, email) {
     return users.some(item => item.Email === email);
 }
 
 // TODO: tests
+function getUser(users, email) {
+    return users.find(item => item.Email === email);
+}
+
 function getUserAccount(users, email, password) {
     return users.find(item => item.Email === email && item.Password === password);
 }
 
-// TODO: tests
 function createUser(users, name, email, password, AuthProvider, AuthProviderId) {
     const newUser = {
         UserId: getUserCount(users),
@@ -33,27 +34,41 @@ function createUser(users, name, email, password, AuthProvider, AuthProviderId) 
     return newUser;
 }
 
-// Create account TODO: tests
+// Create account
 function createAccount(name, email, password, AuthProvider, AuthProviderId) {
-  const users = JSON.parse(fs.readFileSync(USERS_PATH));
-  if (userExist(users, email)) {
-    return { success: false, message: 'Email déjà utilisé.' };
-  }
-
-  const newUser = createUser(users, name, email, password, AuthProvider, AuthProviderId)
-  users.push(newUser);
-  fs.writeFileSync(USERS_PATH, JSON.stringify(users, null, 2));
-  return { success: true, user: newUser };
+    const users = JSON.parse(fs.readFileSync(USERS_PATH));
+    if (userExist(users, email)) {
+        return { success: false, message: 'Email déjà utilisé.' };
+    }
+    const newUser = createUser(users, name, email, password, AuthProvider, AuthProviderId)
+    users.push(newUser);
+    fs.writeFileSync(USERS_PATH, JSON.stringify(users, null, 2));
+    return { success: true, user: newUser };
 }
 
-// Login TODO: tests
+// Login
 function login(email, password) {
-  const users = JSON.parse(fs.readFileSync(USERS_PATH));
-  const user = getUserAccount(users, email, password);
-  if (!user) {
-    return { success: false, message: 'Identifiants invalides.' };
-  }
-  return { success: true, user };
+    const users = JSON.parse(fs.readFileSync(USERS_PATH));
+    const user = getUserAccount(users, email, password);
+    if (!user) {
+        return { success: false, message: 'Identifiants invalides.' };
+    }
+    return { success: true, user };
 }
 
-module.exports = { createAccount, login };
+/*
+* @params: email: string
+* @return: { success: bool, message: string? }
+*/
+function deleteAccount(email) {
+    const users = JSON.parse(fs.readFileSync(USERS_PATH));
+    const user = getUser(users, email);
+    if (!user) {
+        return { success: false, message: 'User not found'};
+    }
+    const update = users.filter(item => item !== user);
+    fs.writeFileSync(USERS_PATH, JSON.stringify(update, null, 2));
+    return { success: true }
+}
+
+module.exports = { createAccount, login, deleteAccount };
