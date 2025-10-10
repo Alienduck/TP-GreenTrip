@@ -1,55 +1,100 @@
-# TP-GreenTrip
+# 🚀 TP-GreenTrip
 
-## Backend
+## 🧩 Backend
 
-### Objets
+### 📦 Modèles de données
 
-- `User`
-    - UserId: `number`
-    - Name: `string`
-    - Email: `string`
-    - Password: `string`
-    - AuthProvider `"local" | "google"`
+#### 👤 `User`
+
+| Champ           | Type                        | Description                      |
+|----------------|-----------------------------|----------------------------------|
+| `UserId`        | `number`                    | Identifiant unique de l'utilisateur |
+| `Name`          | `string`                    | Nom complet                      |
+| `Email`         | `string`                    | Adresse email                    |
+| `Password`      | `string`                    | Mot de passe (à hasher)          |
+| `AuthProvider`  | `"local" | "google"`        | Méthode d'authentification       |
+| `AuthProviderId`| `string`                    | ID du fournisseur externe        |
+| `Bookings`      | `[Booking]`                 | Réservations associées           |
+
+---
+
+#### 🚗 `Trip`
+
+| Champ           | Type       | Description                      |
+|----------------|------------|----------------------------------|
+| `TripId`        | `number`   | Identifiant unique du trajet     |
+| `UserId`        | `number`   | Créateur du trajet (conducteur)  |
+| `Start`         | `string`   | Ville de départ                  |
+| `End`           | `string`   | Ville d’arrivée                  |
+| `TransportMode` | `string`   | Mode de transport                |
+| `Places`        | `number`   | Nombre de places disponibles     |
+| `Price`         | `number`   | Prix par place                   |
+
+---
+
+#### 📦 `Booking`
+
+| Champ     | Type       | Description                      |
+|-----------|------------|----------------------------------|
+| `BookId`   | `number`   | Identifiant unique de la réservation |
+| `UserId`   | `number`   | Utilisateur qui réserve          |
+| `TripId`   | `number`   | Trajet réservé                   |
+| `Date`     | `datetime` | Date de la réservation           |
+
+---
+
+### ⚙️ Fonctions disponibles
+
+#### 🔐 `createAccount`
+
+```js
+createAccount(name, email, password, AuthProvider, AuthProviderId)
+```
+- Paramètres :
+    - name: `string`
+    - email: `string`
+    - password: `string`
+    - AuthProvider: `"local" | "google"`
     - AuthProviderId: `string`
-    - Bookings: `[Booking]`
 
-- `Trip`
-    - TripId: `number`
-    - UserId: `number`
-    - Start: `string`
-    - End: `string`
-    - TransportMode: `string`
-    - Places: `number`
-    - Price: `number`
+- Retourne:
+    ```js
+    {
+    success: boolean,
+    message?: string,
+    user: User
+    }
+    ```
 
-- `Booking`
-    - BookId: `number`
-    - UderId: `number`
-    - TripId: `number`
-    - Date: `datetime`
+#### 🔓`login`
+```js
+login(email, password)
+```
 
-### Fonctions
+- Paramètres:
+    - email: `string`
+    - password: `string`
 
-- `createAccount`
-    - Paramètres: 
-        - name: `string`
-        - email: `string`
-        - password: `string`
-    - Retourne un dictionnaire avec les clés:
-        - success: `bool`
-        - message: `string?`
-        - user: `User`
-- `login`
-    - Paramètres:
-        - email: `string`
-        - password: `string`
-    - Retourne un dictionnaire avec les clés:
-        - success: `bool`
-        - message: `string`
-        - user: `User`
-- `deleteAccount`
-    - Paramètre:
-        - email: `string`
-    - Retourne un dictionnaire avec les clés:
-        - success: `bool`
-        - message: `string`
+- Retourne:
+    ```js
+    {
+    success: boolean,
+    message: string,
+    user?: User
+    }
+    ```
+
+#### 🗑️`deleteAccount`
+```js
+deleteAccount(email)
+```
+- Paramètres:
+    - email: `string`
+
+- Retour
+    ```js
+    {
+    success: boolean,
+    message: string
+    }
+    ```
