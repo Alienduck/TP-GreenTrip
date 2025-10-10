@@ -7,5 +7,89 @@
 @tailwind utilities;
 
 body{
-
+    /* background-color: #007bff; */
 }
+
+/* --- Form Container Styling --- */
+#registerForm {
+    /* Center the form on the page */
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    /* Visual aesthetics */
+    background-color: #ffffff; /* White background */
+    border-radius: 12px; /* Softly rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    font-family: 'Arial', sans-serif; /* Readable font */
+}
+
+/* --- Heading Styling (Inscription) --- */
+#registerForm h2 {
+    text-align: center;
+    color: #333333; /* Dark text */
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+/* --- Input Field Styling --- */
+#registerForm input[type="text"],
+#registerForm input[type="email"],
+#registerForm input[type="nom"],
+#registerForm input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #dddddd; /* Light gray border */
+    border-radius: 8px; /* Slightly rounded inputs */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transitions for hover/focus */
+}
+
+/* Focus state for input fields */
+#registerForm input:focus {
+    border-color: #007bff; /* Bright blue border when active */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* Light glow */
+    outline: none; /* Remove default browser outline */
+}
+
+/* --- Submit Button Styling (S'inscrire) --- */
+#registerForm button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff; /* Primary blue color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+/* Hover state for the button */
+#registerForm button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* --- Message/Error Styling --- */
+.message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #333333; /* Default text color for messages */
+}
+
+/* Optional: Add a class for success/error messages if you use JavaScript to change the message */
+/* Example for an error message: */
+/* .error {
+    color: #dc3545; 
+    font-weight: bold;
+} */
+
+/* Example for a success message: */
+/* .success {
+    color: #28a745;
+    font-weight: bold;
+} */

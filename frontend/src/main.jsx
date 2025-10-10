@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.jsx";
-//import "./index.css"; // si tu veux les styles globaux
+import Inscription from "./components/inscription.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/register" element={<Inscription />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
