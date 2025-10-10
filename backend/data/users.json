@@ -1,11 +1,1 @@
-[
-  {
-    "UserId": 1,
-    "Name": "Dana",
-    "Email": "dana@example.com",
-    "Password": "secret",
-    "AuthProvider": "local",
-    "AuthProviderId": "",
-    "Bookings": []
-  }
-]
+[]
