@@ -1,15 +1,12 @@
-// routes/auth.js
+import express from "express";
+import { register,login } from "../controller/authController.js";
 
-const express = require("express");
+
 const router = express.Router();
 
-// 💡 ATTENTION : Corrigez le chemin si votre dossier s'appelle 'controllers' (pluriel)
-// Je vais utiliser 'controllers' comme standard ici :
-const authController = require('../controller/authController'); 
+// Route d'inscription
+router.post("/register", register);
 
+router.post("/login", login )
 
-// Cette seule ligne suffit : elle passe la main à la fonction register
-// de votre authController pour gérer la logique complète (hachage, écriture JSON).
-router.post('/register', authController.register); 
-
-module.exports = router;
+export default router;

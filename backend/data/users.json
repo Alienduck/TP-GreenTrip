@@ -25,5 +25,41 @@
     "AuthProvider": "local",
     "AuthProviderId": null,
     "Bookings": []
+  },
+  {
+    "UserId": 4,
+    "Name": "15/10/2025",
+    "Email": "Le15@2025Oc",
+    "Password": "$2b$10$pBwEjCfKDpadNcWULbDZZucj97tcXTGOyn3lA.V5sJ4/VuK7yshrm",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 5,
+    "Name": "afrid",
+    "Email": "afrid.azar@gmail.com",
+    "Password": "$2b$10$CAYoff2k393OaXw6c.Wr6umF9ZWs5QAAdbtBvhwQvtiSyP2Pjicsm",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 6,
+    "Name": "ibra",
+    "Email": "ibra.elYazidi@gmail.com",
+    "Password": "$2b$10$wgvbcpVm/ExrXDyCOdoUUuaecSy50M5q/5m3uHTzzClWp0k6c0gYS",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 7,
+    "Name": "ben",
+    "Email": "ben@ben.com",
+    "Password": "$2b$10$scToxb4FB0UU1akBEGuThOrcWSbEccLpNXdiNRWgJBf4xWnA6DBFS",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
   }
 ]

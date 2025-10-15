@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 export default function Inscription() {
-  // 1. Décommenter l'état pour le nom (name)
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");

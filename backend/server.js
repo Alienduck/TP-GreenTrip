@@ -1,7 +1,7 @@
-const express = require('express');
-const cors = require('cors');
+import express from "express";
+import cors from "cors";
 const app = express();
-const authRoutes = require('./routes/auth');
+import authRoutes from "./routes/auth.js"; 
 
 app.use(cors());
 app.use(express.json());
@@ -9,11 +9,6 @@ app.use("/auth", authRoutes);
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Bienvenue sur le backend GreenTrip 🌱' });
-});
-
-app.get('/register', (req, res) => {
-  res.send({message : 'page inscription'});
-
 });
 
 const PORT = 5000;

@@ -1,95 +1,113 @@
-// controllers/authController.js
+import { promises as fs } from "fs";
+import path from "path";
+import bcrypt from "bcrypt";
+import { fileURLToPath } from "url";
 
-const fs = require('fs').promises; // Pour les opérations de fichiers asynchrones
-const path = require('path');
-const bcrypt = require('bcrypt'); // Pour hacher le mot de passe
+// __dirname n'existe pas en ES Modules, on le recrée :
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// Chemin d'accès au fichier de données (assurez-vous que le chemin est correct pour votre structure)
-const USERS_FILE_PATH = path.join(__dirname, '..', 'data', 'users.json');
+// Chemin vers le fichier JSON
+const USERS_FILE_PATH = path.join(__dirname, "..", "data", "users.json");
 
 // ----------------------
 // Fonctions utilitaires JSON
 // ----------------------
 
-/**
- * Lit le fichier users.json et retourne le tableau d'utilisateurs.
- */
 async function readUsers() {
-    try {
-        const data = await fs.readFile(USERS_FILE_PATH, 'utf-8');
-        // Si le fichier est vide, JSON.parse va échouer, nous gérons cela
-        if (!data) return [];
-        return JSON.parse(data);
-    } catch (error) {
-        // En cas d'erreur de lecture (fichier inexistant) ou de parsing, on retourne un tableau vide.
-        return []; 
-    }
+  try {
+    const data = await fs.readFile(USERS_FILE_PATH, "utf-8");
+    if (!data) return [];
+    return JSON.parse(data);
+  } catch (error) {
+    return [];
+  }
 }
 
-/**
- * Écrit le tableau d'utilisateurs mis à jour dans le fichier users.json.
- */
 async function writeUsers(users) {
-    // Écrit le JSON avec une indentation de 2 espaces pour la lisibilité
-    await fs.writeFile(USERS_FILE_PATH, JSON.stringify(users, null, 2), 'utf-8');
+  await fs.writeFile(USERS_FILE_PATH, JSON.stringify(users, null, 2), "utf-8");
 }
 
 // ----------------------
-// Contrôleur : Inscription (Register)
+// Contrôleur : Inscription
 // ----------------------
 
-exports.register = async (req, res) => {
-    // 1. Récupération et validation des données
-    const { name, email, password } = req.body;
+export const register = async (req, res) => {
+  const { name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-        return res.status(400).json({ message: "Veuillez fournir un nom, un email et un mot de passe." });
+  if (!name || !email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Veuillez fournir un nom, un email et un mot de passe." });
+  }
+
+  try {
+    const users = await readUsers();
+
+    const existingUser = users.find(
+      (user) => user.Email.toLowerCase() === email.toLowerCase()
+    );
+    if (existingUser) {
+      return res.status(409).json({ message: "Cet email est déjà utilisé." });
     }
 
-    try {
-        const users = await readUsers();
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-        // 2. Vérification de l'unicité de l'email
-        const existingUser = users.find(user => user.Email.toLowerCase() === email.toLowerCase());
-        if (existingUser) {
-            return res.status(409).json({ message: "Cet email est déjà utilisé." });
-        }
+    const maxId = users.length > 0 ? Math.max(...users.map((u) => u.UserId)) : 0;
+    const newUserId = maxId + 1;
 
-        // 3. Hachage sécurisé du mot de passe
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        
-        // 4. Génération du nouvel UserId
-        // Trouve le UserId maximum et ajoute 1. Si le tableau est vide, commence à 1.
-        const maxId = users.length > 0 ? Math.max(...users.map(u => u.UserId)) : 0;
-        const newUserId = maxId + 1;
+    const newUser = {
+      UserId: newUserId,
+      Name: name,
+      Email: email,
+      Password: hashedPassword,
+      AuthProvider: "local",
+      AuthProviderId: null,
+      Bookings: [],
+    };
 
-        // 5. Création de l'objet utilisateur (selon votre modèle)
-        const newUser = {
-            "UserId": newUserId,
-            "Name": name,
-            "Email": email,
-            "Password": hashedPassword, // IMPORTANT : Stocker la version hachée
-            "AuthProvider": "local",
-            "AuthProviderId": null,
-            "Bookings": [] // Initialisé vide
-        };
+    users.push(newUser);
+    await writeUsers(users);
 
-        // 6. Ajout de l'utilisateur et sauvegarde du fichier
-        users.push(newUser);
-        await writeUsers(users);
+    const { Password, ...safeUser } = newUser;
+    res.status(201).json({
+      message: "Inscription réussie ! Vous êtes enregistré.",
+      user: safeUser,
+    });
+  } catch (err) {
+    console.error("Erreur serveur");
+  }}
 
-        // 7. Réponse de succès (201 Created)
-        // Ne jamais renvoyer le mot de passe haché dans la réponse !
-        const { Password: userPassword, ...safeDetails } = newUser;
 
-        res.status(201).json({ 
-            message: "Inscription réussie ! Vous êtes enregistré.",
-            user: safeDetails
-        });
+export const login = async (req, res) => {
+  const { email, password } = req.body;
 
-    } catch (err) {
-        console.error("Erreur serveur lors de l'inscription:", err);
-        res.status(500).json({ message: "Une erreur interne est survenue." });
+  if (!email || !password) {
+    return res.status(400).json({ message: "Veuillez fournir email et mot de passe." });
+  }
+
+
+ try {
+    const users = await readUsers();
+    const user = users.find(u => u.Email.toLowerCase() === email.toLowerCase());
+
+    if (!user) {
+      return res.status(401).json({ message: "Email ou mot de passe incorrect." });
     }
+
+    const isMatch = await bcrypt.compare(password, user.Password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Email ou mot de passe incorrect." });
+    }
+
+    // Ne jamais renvoyer le mot de passe haché
+    const { Password, ...safeUser } = user;
+
+    res.status(200).json({ message: "Connexion réussie ✅", user: safeUser });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Erreur serveur" });
+  }
+
 };
