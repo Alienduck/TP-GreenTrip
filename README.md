@@ -6,15 +6,15 @@
 
 #### 👤 `User`
 
-| Champ            | Type        | Description                         |
-| ---------------- | ----------- | ----------------------------------- | -------------------------- |
-| `UserId`         | `number`    | Identifiant unique de l'utilisateur |
-| `Name`           | `string`    | Nom complet                         |
-| `Email`          | `string`    | Adresse email                       |
-| `Password`       | `string`    | Mot de passe (à hasher)             |
-| `AuthProvider`   | `local      | google`                             | Méthode d'authentification |
-| `AuthProviderId` | `string`    | ID du fournisseur externe           |
-| `Bookings`       | `[Booking]` | Réservations associées              |
+| Champ            | Type                   | Description                         |
+| ---------------- | ---------------------- | ----------------------------------- |
+| `UserId`         | `number`               | Identifiant unique de l'utilisateur |
+| `Name`           | `string`               | Nom complet                         |
+| `Email`          | `string`               | Adresse email                       |
+| `Password`       | `string`               | Mot de passe (à hasher)             |
+| `AuthProvider`   | `local      \| google` | Méthode d'authentification          |
+| `AuthProviderId` | `string`               | ID du fournisseur externe           |
+| `Bookings`       | `[Booking]`            | Réservations associées              |
 
 ---
 
