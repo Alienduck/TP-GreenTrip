@@ -80,6 +80,21 @@ classDiagram
 
 ### ⚙️ Fonctions disponibles
 
+#### 🧠 `logique`
+
+```mermaid
+flowchart TD
+	A(["User"])
+	B(["Créer compte"])
+	C(["Publier un trajet"])
+	D(["Rechercher des trajets"])
+	E(["Réserver des trajets"])
+	A -- 1 to n--> B
+	B --0 to n--> C
+	A -- 0 to n--> D
+	B -- 0 to n--> E
+```
+
 #### 🔐 `createAccount`
 
 ```js
