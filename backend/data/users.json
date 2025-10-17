@@ -70,5 +70,23 @@
     "AuthProvider": "local",
     "AuthProviderId": null,
     "Bookings": []
+  },
+  {
+    "UserId": 9,
+    "Name": "Alienduck",
+    "Email": "oneuillyr@gmail.com",
+    "Password": "$2b$10$xA9NF3zH.8CvsXzFeWdveuC9zxnbRTzdOnJOOjHaaQTeCFrAfsxSy",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
+  },
+  {
+    "UserId": 10,
+    "Name": "inshallah",
+    "Email": "inshallah@wesh.fr",
+    "Password": "$2b$10$TX86KoDUwNGoEVutvAjp6OovohVHGhXhieBx43jiQWqdqWX7LrRkq",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
   }
 ]
