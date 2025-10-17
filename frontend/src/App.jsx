@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Connexion from "./components/connexion";
 import Inscription from "./components/inscription";
+import Profile from "./components/profile";
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
 
         {/* Page d'inscription */}
         <Route path="/register" element={<Inscription />} />
+
+         {/* Page Profil */}
+         <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

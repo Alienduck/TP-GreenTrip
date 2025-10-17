@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,8 +21,9 @@ export default function Connexion() {
       console.log(data);
 
       if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
         setMessage("Connexion réussie ✅");
-        console.log("Utilisateur connecté :", data);
+        navigate("/profile", { state: { user: data.user } })
       } else {
         setMessage(data.message || "Erreur de connexion ❌");
       }
