@@ -61,5 +61,14 @@
     "AuthProvider": "local",
     "AuthProviderId": null,
     "Bookings": []
+  },
+  {
+    "UserId": 8,
+    "Name": "A",
+    "Email": "A@A.A",
+    "Password": "$2b$10$nMVYFZxLDp9otgnFs6YuMuDOlP9OOQ.zD4ZRO2oHjXa4d4QRzItv6",
+    "AuthProvider": "local",
+    "AuthProviderId": null,
+    "Bookings": []
   }
 ]
