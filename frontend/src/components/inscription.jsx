@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function Inscription() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -41,9 +42,8 @@ export default function Inscription() {
         type="text" 
         value={name} 
         onChange={e => setName(e.target.value)} 
-        required // Ajouter 'required' pour une meilleure UX
+        required
       />
-      
       <input 
         placeholder="Email" 
         type="email" 
