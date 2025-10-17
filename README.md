@@ -41,6 +41,41 @@
 | `TripId` | `number`   | Trajet réservé                       |
 | `Date`   | `datetime` | Date de la réservation               |
 
+#### 📊 `Version diagramme`
+
+```mermaid
+---
+title: GreenTrip
+---
+classDiagram
+	class Trip {
+		**🔑TripId**: number
+		**#UserId**: number
+		**Start**: string
+		**End**: string
+		**TransportMode**: string
+		**Places**: number
+		**Price**: number
+	}
+	class User {
+		**🔑UserId**: number
+		**Name**: string
+		**Email**: string
+		**Password**: string
+		**AuthProvider**: "local" | "google"
+		**AuthProviderId**: string
+		**Bookings**: Vector~Booking~
+	}
+	class Booking {
+		**🔑BookId**: number
+		**#UserId**: number
+		**#TripId**: number
+		**Date**: datetime
+	}
+	User "1" --> "*" Booking: has many
+	User "1" --> "*" Trip: has many
+```
+
 ---
 
 ### ⚙️ Fonctions disponibles
